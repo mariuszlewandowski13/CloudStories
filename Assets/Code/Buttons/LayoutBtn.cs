@@ -7,6 +7,7 @@ public class LayoutBtn : MonoBehaviour {
     public GameObject workingEnviroment;
     public GameObject layoutToLoad;
     public Vector3 position;
+    public int layoutNumber;
 
     void Start()
     {
@@ -16,6 +17,6 @@ public class LayoutBtn : MonoBehaviour {
 
     void Loadlayout()
     {
-        workingEnviroment.GetComponent<SpawningManager>().LoadLayout(layoutToLoad, position);
+        workingEnviroment.GetComponent<SpawningManager>().LoadLayout(layoutToLoad, position, layoutNumber);
     }
 }

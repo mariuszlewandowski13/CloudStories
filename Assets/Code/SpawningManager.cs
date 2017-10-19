@@ -13,12 +13,13 @@ public class SpawningManager : MonoBehaviour {
         layoutObject = enviromentPlane.transform.Find("Layout").gameObject;
     }
 
-    public GameObject SpawnObject(GameObject objToSpawn, Vector3 position, Quaternion rotation = new Quaternion())
+    public GameObject SpawnObject(GameObject objToSpawn, Vector3 position, int number,  Quaternion rotation = new Quaternion())
     {
+        GetComponent<DatabaseManager>().SaveObject("3DObj", number, position);
        return  Instantiate(objToSpawn, position, rotation);
     }
 
-    public void LoadLayout(GameObject newLayout, Vector3 pos, Quaternion rotation = new Quaternion())
+    public void LoadLayout(GameObject newLayout, Vector3 pos, int layoutNumber, Quaternion rotation = new Quaternion())
     {
         if (layoutObject.transform.childCount > 0)
         {
@@ -27,9 +28,11 @@ public class SpawningManager : MonoBehaviour {
 
         GameObject newLay = Instantiate(newLayout, pos, rotation);
         newLay.transform.parent = layoutObject.transform;
+
+        GetComponent<DatabaseManager>().SaveLayout(layoutNumber);
     }
 
-    private void ClearLayout()
+    private void ClearLayout(bool save = false)
     {
         if (layoutObject != null)
         {
@@ -38,5 +41,10 @@ public class SpawningManager : MonoBehaviour {
                 Destroy(child.gameObject);
             }
         }
+        if (save)
+        {
+            GetComponent<DatabaseManager>().SaveLayout(0);
+        }
+        
     }
 }

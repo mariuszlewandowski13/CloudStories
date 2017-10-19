@@ -7,6 +7,7 @@ public class CreateObjectButton : MonoBehaviour {
     public GameObject objectToCreate;
     public Vector3 position;
     public GameObject workingEnviroment;
+    public int objectNumber;
 
     void Start()
     {
@@ -16,6 +17,6 @@ public class CreateObjectButton : MonoBehaviour {
 
     void CreateObject()
     {
-        workingEnviroment.GetComponent<SpawningManager>().SpawnObject(objectToCreate, position);
+        workingEnviroment.GetComponent<SpawningManager>().SpawnObject(objectToCreate, position, objectNumber);
     }
 }
